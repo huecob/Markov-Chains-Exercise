@@ -14,7 +14,7 @@ def open_and_read_file(file_path):
 
     return contents
 
-print(open_and_read_file('green-eggs.txt'))
+#print(open_and_read_file('green-eggs.txt'))
 
 
 def make_chains(text_string):
@@ -42,12 +42,30 @@ def make_chains(text_string):
         [None]
     """
 
+    
+
+    #turn argument into one long string with .read()
+    #iterate through the long string 
+        #for i in range(len(text) - 1):
+        #print text[i], text[i + 1]
+    #put pairs (via index) into the return variable chains
+    #sentence: "Good morning, how are you doing?"
+
+    #(words[i], words[i + 1]...words[i + 1], words[i + 2])
+    #('Would', 'you'): ['could', 'could', 'could', 'could', 'like', 'like'],
+
     chains = {}
+    data = open(text_string).read()
+    words = data.split()
 
-    # your code goes here
-
+    for i in range(len(words) - 2):
+        key = (words[i], words[i + 1])
+        value = words[i + 2]
+        if key not in chains:
+            chains[key] = []
+        chains[key].append(value)
+       
     return chains
-
 
 def make_text(chains):
     """Return text from chains."""
@@ -65,7 +83,8 @@ input_path = 'green-eggs.txt'
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains = make_chains(input_text)
+chains = make_chains("green-eggs.txt")
+print(chains)
 
 # Produce random text
 random_text = make_text(chains)
